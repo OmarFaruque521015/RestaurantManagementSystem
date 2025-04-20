@@ -3,20 +3,21 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using RestaurantManagementSystem.DataAccess;
 using RestaurantManagementSystem.Models;
 
-namespace ResturentManagementSystem.Pages.Categories
+namespace ResturentManagementSystem.Pages.Admin.Categories
 {
-    public class CreateModel : PageModel
+    public class EditModel : PageModel
     {
         [BindProperty]
         public Category Category { get; set; }
         private readonly ApplicationDBContext _db;
 
-        public CreateModel(ApplicationDBContext db)
+        public EditModel(ApplicationDBContext db)
         {
             _db = db;
         }
-        public void OnGet()
+        public void OnGet(int id)
         {
+            Category = _db.Category.Find(id);
         }
 
         public async Task<IActionResult> OnPost()
@@ -26,9 +27,9 @@ namespace ResturentManagementSystem.Pages.Categories
             }
             if (ModelState.IsValid)
             {
-                await _db.Category.AddAsync(Category);
-                await _db.SaveChangesAsync(); 
-                TempData["success"] = "Category created successfully";
+                 _db.Category.Update(Category);
+                await _db.SaveChangesAsync();
+                TempData["success"] = "Category Updated successfully";
                 return RedirectToPage("Index");
             }
             return Page();

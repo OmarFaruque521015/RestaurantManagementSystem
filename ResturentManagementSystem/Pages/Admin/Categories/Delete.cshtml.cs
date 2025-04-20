@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using RestaurantManagementSystem.DataAccess;
 using RestaurantManagementSystem.Models;
 
-namespace ResturentManagementSystem.Pages.Categories
+namespace ResturentManagementSystem.Pages.Admin.Categories
 {
     public class DeleteModel : PageModel
     {

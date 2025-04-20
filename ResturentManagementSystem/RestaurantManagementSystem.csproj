@@ -22,10 +22,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Pages\Categories\Edit.cshtml">
+    <Content Update="Pages\Admin\Categories\Edit.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Pages\Admin\Customer\" />
   </ItemGroup>
 
 </Project>
