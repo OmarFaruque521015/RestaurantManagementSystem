@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ResturentManagementSystem.Model
+namespace RestaurantManagementSystem.Models
 {
     public class Category
     {

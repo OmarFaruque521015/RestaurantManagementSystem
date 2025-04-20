@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using ResturentManagementSystem.Data;
-using ResturentManagementSystem.Model;
+using RestaurantManagementSystem.DataAccess;
+using RestaurantManagementSystem.Models;
 
 namespace ResturentManagementSystem.Pages.Categories
 {

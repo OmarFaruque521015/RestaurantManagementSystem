@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ResturentManagementSystem.Model;
+using RestaurantManagementSystem.Models;
 
-namespace ResturentManagementSystem.Data
+namespace RestaurantManagementSystem.DataAccess
 {
     public class ApplicationDBContext:DbContext
     {
