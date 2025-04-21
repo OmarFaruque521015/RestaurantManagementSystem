@@ -3,12 +3,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using RestaurantManagementSystem.DataAccess.Data;
 using RestaurantManagementSystem.Models;
 
-namespace ResturentManagementSystem.Pages.Admin.Categories
+namespace ResturentManagementSystem.Pages.Admin.FoodTypes
 {
     public class DeleteModel : PageModel
     {
         [BindProperty]
-        public Category Category { get; set; }
+        public FoodType foodType { get; set; }
         private readonly ApplicationDBContext _db;
 
         public DeleteModel(ApplicationDBContext db)
@@ -17,17 +17,17 @@ namespace ResturentManagementSystem.Pages.Admin.Categories
         }
         public void OnGet(int id)
         {
-            Category = _db.Category.Find(id);
+            foodType = _db.FoodType.Find(id);
         }
 
         public async Task<IActionResult> OnPost()
         {
-            var Cate = _db.Category.Find(Category.Id);
-            if (Cate != null)
+            var FDT = _db.FoodType.Find(foodType.Id);
+            if (FDT != null)
             {
-                _db.Category.Remove(Cate);
+                _db.FoodType.Remove(FDT);
                 await _db.SaveChangesAsync();
-                TempData["success"] = "Category Deleted successfully";
+                TempData["success"] = "Food Type Deleted successfully";
                 return RedirectToPage("Index");
             }
             return Page();

@@ -3,12 +3,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using RestaurantManagementSystem.DataAccess.Data;
 using RestaurantManagementSystem.Models;
 
-namespace ResturentManagementSystem.Pages.Admin.Categories
+namespace ResturentManagementSystem.Pages.Admin.FoodTypes
 {
     public class CreateModel : PageModel
     {
         [BindProperty]
-        public Category Category { get; set; }
+        public FoodType foodType { get; set; }
         private readonly ApplicationDBContext _db;
 
         public CreateModel(ApplicationDBContext db)
@@ -20,15 +20,12 @@ namespace ResturentManagementSystem.Pages.Admin.Categories
         }
 
         public async Task<IActionResult> OnPost()
-        {
-            if (Category.Name == Category.DisplayOrder.ToString()) {
-                ModelState.AddModelError(Category.Name, "The DisplayOrder can not exectly match the Name.");
-            }
+        { 
             if (ModelState.IsValid)
             {
-                await _db.Category.AddAsync(Category);
+                await _db.FoodType.AddAsync(foodType);
                 await _db.SaveChangesAsync(); 
-                TempData["success"] = "Category created successfully";
+                TempData["success"] = "Food Type created successfully";
                 return RedirectToPage("Index");
             }
             return Page();
