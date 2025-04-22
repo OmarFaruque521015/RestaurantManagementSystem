@@ -30,7 +30,6 @@ namespace RestaurantManagementSystem.DataAccess.Repository
             IQueryable<T> query = dbSet;
             return query.ToList();
         }
-
         public T GetFirstOrDefault(Expression<Func<T, bool>>? filter = null)
         {
             IQueryable<T> query = dbSet;
