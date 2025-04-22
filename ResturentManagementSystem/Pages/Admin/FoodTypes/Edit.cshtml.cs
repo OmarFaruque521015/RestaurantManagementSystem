@@ -15,7 +15,7 @@ namespace ResturentManagementSystem.Pages.Admin.FoodTypes
         public EditModel(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-        }
+        } 
         public void OnGet(int id)
         {
             foodType = _unitOfWork.FoodType.GetFirstOrDefault(u => u.Id == id);
