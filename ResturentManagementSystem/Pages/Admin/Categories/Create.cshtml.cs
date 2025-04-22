@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RestaurantManagementSystem.DataAccess.Data;
+using RestaurantManagementSystem.DataAccess.Repository.IRepository;
 using RestaurantManagementSystem.Models;
 
 namespace ResturentManagementSystem.Pages.Admin.Categories
@@ -9,11 +10,11 @@ namespace ResturentManagementSystem.Pages.Admin.Categories
     {
         [BindProperty]
         public Category Category { get; set; }
-        private readonly ApplicationDBContext _db;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public CreateModel(ApplicationDBContext db)
+        public CreateModel(IUnitOfWork unitOfWork)
         {
-            _db = db;
+            _unitOfWork = unitOfWork;
         }
         public void OnGet()
         {
@@ -21,13 +22,14 @@ namespace ResturentManagementSystem.Pages.Admin.Categories
 
         public async Task<IActionResult> OnPost()
         {
-            if (Category.Name == Category.DisplayOrder.ToString()) {
+            if (Category.Name == Category.DisplayOrder.ToString())
+            {
                 ModelState.AddModelError(Category.Name, "The DisplayOrder can not exectly match the Name.");
             }
             if (ModelState.IsValid)
             {
-                await _db.Category.AddAsync(Category);
-                await _db.SaveChangesAsync(); 
+                _unitOfWork.Category.Add(Category);
+                _unitOfWork.Save();
                 TempData["success"] = "Category created successfully";
                 return RedirectToPage("Index");
             }

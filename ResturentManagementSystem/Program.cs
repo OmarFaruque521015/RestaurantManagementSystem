@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using RestaurantManagementSystem.DataAccess.Data;
+using RestaurantManagementSystem.DataAccess.Repository;
+using RestaurantManagementSystem.DataAccess.Repository.IRepository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,10 +9,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 
 //Add new DI
-builder.Services.AddDbContext<ApplicationDBContext>(Options=>Options.UseSqlServer(
+builder.Services.AddDbContext<ApplicationDBContext>(Options => Options.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection")
     ));
 
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
 

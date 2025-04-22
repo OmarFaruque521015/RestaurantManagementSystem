@@ -1,21 +1,22 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RestaurantManagementSystem.DataAccess.Data;
+using RestaurantManagementSystem.DataAccess.Repository.IRepository;
 using RestaurantManagementSystem.Models;
 
 namespace ResturentManagementSystem.Pages.Admin.FoodTypes
 {
     public class IndexModel : PageModel
     {
-        public ApplicationDBContext _db;
+        public IUnitOfWork _unitOfWork;
         public IEnumerable<FoodType> FoodTypes { get; set; }
-        public IndexModel(ApplicationDBContext db)
+        public IndexModel(IUnitOfWork unitOfWork)
         {
-              _db = db;
+            _unitOfWork = unitOfWork;
         }
         public void OnGet()
         {
-            FoodTypes = _db.FoodType;
+            FoodTypes = _unitOfWork.FoodType.GetAll();
         }
     }
 }

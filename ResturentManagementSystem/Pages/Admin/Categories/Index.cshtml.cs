@@ -1,21 +1,23 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RestaurantManagementSystem.DataAccess.Data;
+using RestaurantManagementSystem.DataAccess.Repository.IRepository;
 using RestaurantManagementSystem.Models;
 
 namespace ResturentManagementSystem.Pages.Admin.Categories
 {
     public class IndexModel : PageModel
     {
-        public ApplicationDBContext _db;
         public IEnumerable<Category> Categories { get; set; }
-        public IndexModel(ApplicationDBContext db)
+        private readonly IUnitOfWork _unitOfWork;
+
+        public IndexModel(IUnitOfWork unitOfWork)
         {
-              _db = db;
+            _unitOfWork = unitOfWork;
         }
         public void OnGet()
         {
-            Categories = _db.Category;
+            Categories = _unitOfWork.Category.GetAll( );
         }
     }
 }

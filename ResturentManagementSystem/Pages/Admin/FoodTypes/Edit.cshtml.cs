@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RestaurantManagementSystem.DataAccess.Data;
+using RestaurantManagementSystem.DataAccess.Repository.IRepository;
 using RestaurantManagementSystem.Models;
 
 namespace ResturentManagementSystem.Pages.Admin.FoodTypes
@@ -9,23 +10,23 @@ namespace ResturentManagementSystem.Pages.Admin.FoodTypes
     {
         [BindProperty]
         public FoodType foodType { get; set; }
-        private readonly ApplicationDBContext _db;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public EditModel(ApplicationDBContext db)
+        public EditModel(IUnitOfWork unitOfWork)
         {
-            _db = db;
+            _unitOfWork = unitOfWork;
         }
         public void OnGet(int id)
         {
-            foodType = _db.FoodType.Find(id);
+            foodType = _unitOfWork.FoodType.GetFirstOrDefault(u => u.Id == id);
         }
 
         public async Task<IActionResult> OnPost()
-        { 
+        {
             if (ModelState.IsValid)
             {
-                 _db.FoodType.Update(foodType);
-                await _db.SaveChangesAsync();
+                _unitOfWork.FoodType.Update(foodType);
+                _unitOfWork.Save();
                 TempData["success"] = "Food Type Updated successfully";
                 return RedirectToPage("Index");
             }

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RestaurantManagementSystem.DataAccess.Data;
+using RestaurantManagementSystem.DataAccess.Repository.IRepository;
 using RestaurantManagementSystem.Models;
 
 namespace ResturentManagementSystem.Pages.Admin.Categories
@@ -9,24 +10,24 @@ namespace ResturentManagementSystem.Pages.Admin.Categories
     {
         [BindProperty]
         public Category Category { get; set; }
-        private readonly ApplicationDBContext _db;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public DeleteModel(ApplicationDBContext db)
+        public DeleteModel(IUnitOfWork unitOfWork)
         {
-            _db = db;
+            _unitOfWork = unitOfWork;
         }
         public void OnGet(int id)
         {
-            Category = _db.Category.Find(id);
+            Category = _unitOfWork.Category.GetFirstOrDefault(u => u.Id == id);
         }
 
         public async Task<IActionResult> OnPost()
         {
-            var Cate = _db.Category.Find(Category.Id);
+            var Cate = _unitOfWork.Category.GetFirstOrDefault(u => u.Id == Category.Id);
             if (Cate != null)
             {
-                _db.Category.Remove(Cate);
-                await _db.SaveChangesAsync();
+                _unitOfWork.Category.Remove(Cate);
+                 _unitOfWork.Save();
                 TempData["success"] = "Category Deleted successfully";
                 return RedirectToPage("Index");
             }
