@@ -17,9 +17,11 @@ namespace RestaurantManagementSystem.DataAccess.Repository
             _db = db;
             Category=new CategoryRepository(db);
             FoodType=new FoodTypeRepository(db);
+            MenuItem=new MenuItemRepository(db);
         }
         public ICategoryRepository Category { get; private set; }
         public IFoodTypeRepository FoodType { get; private set; }
+        public IMenuItemRepository MenuItem { get; private set; }
         public void Dispose() 
         {
             _db.Dispose();
