@@ -14,20 +14,24 @@
     </div>
     <br /><br />
 
-    <table class="table table-bordered table-striped" style="width:100%">
+    <table id="DT_Load" class="table table-bordered table-striped" style="width:100%">
         <thead>
             <tr>
                 <th>Name</th>
                 <th>Price</th>
                 <th>Category</th>
                 <th>Food Type</th>
+                @* <th>Action</th> *@
             </tr>
         </thead>
-        <tbody>
+@*         <tbody>
             @foreach (var obj in Model.MenuItems)
             {
                 <tr>
                     <td width="50%">@obj.Name</td>
+                    <td width="50%">@obj.Price</td>
+                    <td width="50%">@obj.Category</td>
+                    <td width="50%">@obj.FoodType</td>
                     <td>
                         <a asp-page="Edit" asp-route-id="@obj.Id" class="btn btn-primary mx-2">
                             <i class="bi bi-pencil-square"></i>
@@ -39,5 +43,9 @@
                 </tr>
             }
         </tbody>
-    </table>
+ *@    </table>
 </div>
+
+@section Scripts{
+    <script src="~/js/menuItem.js"></script>
+}
