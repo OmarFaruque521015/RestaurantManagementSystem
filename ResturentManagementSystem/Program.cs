@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using RestaurantManagementSystem.DataAccess.Data;
 using RestaurantManagementSystem.DataAccess.Repository;
@@ -12,6 +13,9 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<ApplicationDBContext>(Options => Options.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection")
     ));
+
+builder.Services.AddDefaultIdentity<IdentityUser>()
+	.AddEntityFrameworkStores<ApplicationDBContext>();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -29,7 +33,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication(); 
 app.UseAuthorization();
 
 app.MapRazorPages();

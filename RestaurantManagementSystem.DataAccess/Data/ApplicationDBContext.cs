@@ -3,7 +3,7 @@ using RestaurantManagementSystem.Models;
 
 namespace RestaurantManagementSystem.DataAccess.Data
 {
-    public class ApplicationDBContext : DbContext
+    public class ApplicationDBContext : Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext
     {
         public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) : base(options)
         {
