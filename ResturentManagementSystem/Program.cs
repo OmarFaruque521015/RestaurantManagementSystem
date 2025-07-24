@@ -1,8 +1,11 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using RestaurantManagementSystem.DataAccess.Data;
 using RestaurantManagementSystem.DataAccess.Repository;
 using RestaurantManagementSystem.DataAccess.Repository.IRepository;
+using RestaurantManagementSystem.Models;
+using RestaurantManagementSystem.Utility;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,9 +17,13 @@ builder.Services.AddDbContext<ApplicationDBContext>(Options => Options.UseSqlSer
     builder.Configuration.GetConnectionString("DefaultConnection")
     ));
 
-builder.Services.AddDefaultIdentity<IdentityUser>()
-	.AddEntityFrameworkStores<ApplicationDBContext>();
+//builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+//    .AddEntityFrameworkStores<ApplicationDBContext>();
 
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDBContext>().AddDefaultTokenProviders();
+
+builder.Services.AddSingleton<IEmailSender, EmailSender>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();

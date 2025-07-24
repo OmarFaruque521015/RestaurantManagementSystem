@@ -24,17 +24,17 @@
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li> 
+                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Admin</a>
                             <div class="dropdown-menu">
-                                <a class="nav-link text-white" asp-area="" asp-page="/Admin/Categories/Index">Category</a> 
+                                <a class="nav-link text-white" asp-area="" asp-page="/Admin/Categories/Index">Category</a>
                                 <a class="nav-link text-white" asp-area="" asp-page="/Admin/FoodTypes/Index">Food Type</a>
-                                <a class="nav-link text-white" asp-area="" asp-page="/Admin/MenuItems/Index">Menu Item</a> 
+                                <a class="nav-link text-white" asp-area="" asp-page="/Admin/MenuItems/Index">Menu Item</a>
                             </div>
                         </li>
-
                     </ul>
+                    <partial name="_LoginPartial"></partial>
                 </div>
             </div>
         </nav>
@@ -46,7 +46,7 @@
             @RenderBody()
         </main>
     </div>
-     
+
     <footer class="border-top footer text-muted bg-dark text-center text-white py-3 mt-auto">
         <div class="container">
             &copy; 2025 - ResturentManagementSystem - <a asp-area="" asp-page="/Privacy">Privacy</a>
